@@ -14,6 +14,8 @@ import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import { FirebaseAppProvider } from "reactfire";
 import firebaseConfig from "./config/firebase";
 import Login from "./screens/Login";
+import Registrar from "./screens/Registrar";
+import TyC from "./screens/TyC";
 
 const Stack = createStackNavigator();
 
@@ -50,6 +52,21 @@ export default function App(props) {
                 }}
                 name="Login"
                 component={Login}
+              />
+
+              <Stack.Screen
+                options={{
+                  title: "Registrate",
+                }}
+                name="Registrar"
+                component={Registrar}
+              />
+              <Stack.Screen
+                options={{
+                  title: "Terminos y condiciones",
+                }}
+                name="TyC"
+                component={TyC}
               />
 
               <Stack.Screen name="Root" component={BottomTabNavigator} />

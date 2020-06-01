@@ -15,13 +15,16 @@ import {
   Text,
   View,
   Item,
-  Grid,
-  Col,
 } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 const Login = () => {
+  const navigation = useNavigation();
+  //Datos para guardar en el state
   const [correo, setcorreo] = useState("");
   const [password, setpassword] = useState("");
+  const [nombre, setnombre] = useState("");
+  const [telefono, settelefono] = useState("");
 
   //Mostrat o ocultar contraseña
   const [verPassword, setVerPassword] = useState(true);
@@ -103,7 +106,12 @@ const Login = () => {
             >
               <Text style={{ marginLeft: 10 }}>
                 ¿No tienes cuenta?{" "}
-                <Text style={styles.link}>Registrate aqui!</Text>
+                <Text
+                  onPress={() => navigation.navigate("Registrar")}
+                  style={styles.link}
+                >
+                  Registrate aqui!
+                </Text>
               </Text>
             </View>
             <Button
