@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Alert } from "react-native";
 import {
   Input,
   Container,
@@ -34,6 +34,28 @@ const Login = () => {
     } else {
       setIcon("eye-off");
       setVerPassword(true);
+    }
+  };
+
+  const iniciarSesion = () => {
+    ///validando
+    if (correo === "" && password === "") {
+      Alert.alert(
+        "UPS! Error",
+        "Todos los campos son necesarios, Por favor llene todos los campos",
+        [{ text: "OK" }]
+      );
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(correo)) {
+      Alert.alert("UPS! Error", "Por favor ingrese un email valido", [
+        { text: "OK" },
+      ]);
+    } else if (password.length < 6) {
+      Alert.alert("UPS! Error", "La contraseña debe ser mayor a 6 caracteres", [
+        { text: "OK" },
+      ]);
+    } else {
+      //Iniciar sesion en firebase
+      console.log("iniciando ");
     }
   };
   return (
@@ -84,7 +106,13 @@ const Login = () => {
                 <Text style={styles.link}>Registrate aqui!</Text>
               </Text>
             </View>
-            <Button style={styles.boton} block rounded iconRight>
+            <Button
+              style={styles.boton}
+              block
+              rounded
+              iconRight
+              onPress={() => iniciarSesion()}
+            >
               <Text style={{ fontSize: 15, color: "white" }}>
                 Iniciar sesion {""}
                 <Icon
