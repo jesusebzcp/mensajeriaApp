@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { Button, Text } from "native-base";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   contenedor: {
@@ -15,17 +16,23 @@ const styles = StyleSheet.create({
   },
 });
 const Inicio = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.contenedor}>
       <Image style={styles.img} source={require("../assets/images/logo.png")} />
       <View style={{ width: "90%" }}>
-        <Button block style={{ backgroundColor: "#FA4F04" }}>
+        <Button
+          block
+          style={{ backgroundColor: "#FA4F04" }}
+          onPress={() => navigation.navigate("Registrar")}
+        >
           <Text style={{ fontSize: 15, textTransform: "capitalize" }}>
             Soy nuevo por aqui
           </Text>
         </Button>
 
         <Button
+          onPress={() => navigation.navigate("Login")}
           transparent
           block
           style={{
@@ -46,7 +53,6 @@ const Inicio = () => {
           </Text>
         </Button>
       </View>
-      <Text style={{ color: "gray", marginTop: 50 }}>Omitir</Text>
     </View>
   );
 };

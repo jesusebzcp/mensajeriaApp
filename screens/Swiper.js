@@ -38,7 +38,13 @@ const styles = {
 const SwiperView = () => {
   const navigation = useNavigation();
   return (
-    <Swiper dotColor="#000" activeDotColor="#FA4F04" loop={false}>
+    <Swiper
+      showsButtons={false}
+      autoplay={true}
+      autoplayTimeout={4}
+      dotColor="#000"
+      activeDotColor="#FA4F04"
+    >
       <View testID="View1" style={styles.slide1}>
         <Image
           style={styles.logo}
@@ -72,7 +78,7 @@ const SwiperView = () => {
           onPress={() => navigation.navigate("Inicio")}
           style={{ fontWeight: "bold", color: "#FA4F04", marginTop: 20 }}
         >
-          Continuar{" "}
+          Continuar
         </Text>
       </View>
     </Swiper>

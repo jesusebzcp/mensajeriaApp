@@ -19,7 +19,12 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
+import "firebase/auth";
+import { useFirebaseApp, useUser } from "reactfire";
+
 const Registrar = () => {
+  const firebase = useFirebaseApp();
+  const user = useUser();
   const navigation = useNavigation();
   //Redirecionar
 
@@ -42,7 +47,7 @@ const Registrar = () => {
     }
   };
 
-  const iniciarSesion = () => {
+  const iniciarSesion = async () => {
     ///validando
     if (correo === "" && password === "" && telefono === "" && nombre === "") {
       Alert.alert(
@@ -60,7 +65,17 @@ const Registrar = () => {
       ]);
     } else {
       //Iniciar sesion en firebase
-      console.log("iniciando ");
+      try {
+        const nuevoUsuario = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(correo, password);
+        console.log(nuevoUsuario);
+        return await nuevoUsuario.user.updateProfile({
+          displayName: nombre,
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
   return (
@@ -124,7 +139,7 @@ const Registrar = () => {
               }}
             >
               <Text style={{ marginLeft: 10 }}>
-                Al crear una cuenta,{" "}
+                Al crear una cuenta,
                 <Text
                   onPress={() => navigation.navigate("TyC")}
                   style={styles.link}
@@ -141,7 +156,7 @@ const Registrar = () => {
               onPress={() => iniciarSesion()}
             >
               <Text style={{ fontSize: 15, color: "white" }}>
-                Registrarme {""}
+                Registrarme{" "}
                 <Icon
                   style={{
                     fontWeight: "bold",
