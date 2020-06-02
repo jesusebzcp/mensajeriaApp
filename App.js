@@ -16,6 +16,8 @@ import firebaseConfig from "./config/firebase";
 import Login from "./screens/Login";
 import Registrar from "./screens/Registrar";
 import TyC from "./screens/TyC";
+import SwiperView from "./screens/Swiper";
+import Inicio from "./screens/Inicio";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +48,20 @@ export default function App(props) {
           {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
           <NavigationContainer linking={LinkingConfiguration}>
             <Stack.Navigator>
+              <Stack.Screen
+                options={{
+                  headerShown: false,
+                }}
+                name="SwiperView"
+                component={SwiperView}
+              />
+              <Stack.Screen
+                options={{
+                  headerShown: false,
+                }}
+                name="Inicio"
+                component={Inicio}
+              />
               <Stack.Screen
                 options={{
                   headerShown: false,
